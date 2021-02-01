@@ -1,0 +1,64 @@
+<!--voting time over here-->
+
+{% extends "layout.html" %}
+{% block title %}Kilpailun tulokset{% endblock %}
+
+{% block content %}
+
+<h2>Kuvakilpailun äänestys</h2>
+
+<p>Äänestä kuvakisaan lähetetyistä kuvista mielestäsi viittä parasta antamalla parhaalle kuvalle 5 pistettä,
+     toiseksi parhaalle 4 ja kolmanneksi parhaalle 3 piste jne. Äänestää vain mielestäsi viittä parasta
+     kuvaa ja muille kuville älä anna pisteitä.
+</p>
+<p> Jos muutat mieltäsi voit poistaa kuvan pisteet oik. alakulmasta "Poista valinta" "Clear selection". </p>
+  
+<p>Vuonna 2021 "Jäsenistön valinta" on oma pistekilpailunsa, jossa pisteitä saa kolme parasta kuukausittain, 
+    voittajalle 4, toiselle 2 ja kolmannelle 1 piste. Vuoden lopussa tämänkin pistekilpailun voittaja palkitaan.
+</p>
+<p>Älä äänestä kuin yhden kerran.</p>
+<br>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+
+
+<form action="/sendvote" method="POST" name="vote">
+<ul> 
+    {% for imageid in imageid %}
+    <p><img src="{{url_for('images', id=imageid[0])}}" width="50%" height="50%"></p>
+    <input type="radio" name="{{ imageid[0] }}" id="vote1" value="1"> 1
+    <input type="radio" name="{{ imageid[0] }}" id="vote2" value="2"> 2
+    <input type="radio" name="{{ imageid[0] }}" id="vote3" value="3"> 3
+    <input type="radio" name="{{ imageid[0] }}" id="vote4" value="4"> 4
+    <input type="radio" name="{{ imageid[0] }}" id="vote5" value="5"> 5
+    <br>
+
+    <input type="hidden" name="id" value="{{ imageid[0] }}">
+
+    {% print(imageid[0]) %}
+    <a href="#" id="clear-button">Tyhjennä</a>
+    <br>
+    {% endfor %}
+</ul>
+<input type="submit" value="Lähetä">
+</form>
+
+<script type="text/javascript">
+    document.getElementById('clear-button').addEventListener("click", function () {
+      ["vote1","vote2","vote3","vote4","vote5"].forEach(function(id) {
+        console.log(id);  
+        document.getElementById(id).checked = false;
+      });
+      return false;
+    })
+  </script>
+
+{% endblock %}

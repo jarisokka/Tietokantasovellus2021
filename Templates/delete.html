@@ -1,0 +1,36 @@
+<!--delete images-->
+
+{% extends "layout.html" %}
+{% block title %}Kuvien poisto{% endblock %}
+
+{% block content %}
+
+<h2>Kuvien poistaminen</h2>
+
+<p>Tähän ohjeita kuvien poistamiseen.</p>
+<br>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+
+
+{% for idname in idname %}
+<form action="/remove" method="POST">
+    <ul> 
+        <p><img src="{{url_for('images', id=idname[0])}}" width="50%" height="50%"></p>
+        <p>{{ idname[1] }}</p>
+        <input type="hidden" name="id" value="{{ idname[0] }}">
+        <input type="submit" value="Poista kuva">
+        <br>
+    </ul>
+</form>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,53 @@
+<!--home page-->
+
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+
+{% block content %}
+
+<h1>Tervetuloa valokuvien äänestykseen</h1>
+<p>Voit tutustua kuviin jatkamalla vierailijana, mutta äänestykseen
+    vaaditaan sisäänkirjautumista. Jos sinulla ei ole vielä tunnuksia, voit
+    luoda ne rekisteröitymis kohdasta.
+</p>
+<br>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+
+{% if session.username %}
+
+<p> Tervetuloa äänestämään käyttäjä {{ session.username }}</p>
+<br>
+<p> Voit siityä äänestämään valitsemalla Äänestys-välilehden</p>
+<br>
+{% else %}
+
+<form action="/login" method="POST">
+    <label for="username">Tunnus:</label>
+    <input type="text" name="username"><br>
+    <label for="password">Salasana:</label>
+    <input type="password" name="password"><br>
+    <input type="submit" value="Kirjaudu">
+  </form>
+<br>
+<br>
+<p>Voit jatkaa myös vierailijana</p>
+<form action="/show_images" method="GET">
+    <input type="submit" value="Jatka vierailijana">
+</form>
+<p>Jos sinulla ei ole tunnusta voit rekisteröityä tästä</p>
+<form action="/register" method="GET">
+    <input type="submit" value="Rekisteröidy">
+</form>
+
+{% endif %}
+
+{% endblock %}

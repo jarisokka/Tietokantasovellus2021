@@ -1,0 +1,44 @@
+<!--layout for all the pages-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+        <div class="navbar">
+            <a href="{{ url_for('index') }}" class="navbar-brand">Etusivu</a>
+            <a href="{{ url_for('show_images') }}" class="navbar-brand">Katselu</a>
+            <a href="{{ url_for('vote') }}" class="navbar-brand">Äänestys</a>
+            <a href="{{ url_for('upload') }}" class="navbar-brand">Lataaminen</a>
+            <a href="{{ url_for('result') }}" class="navbar-brand">Tulokset</a>
+            <a href="{{ url_for('delete') }}" class="navbar-brand">Poista</a>
+
+            {% if session.username %}
+                <a href="/logout" class="navbar-user">Kirjaudu ulos</a>
+                <a class="navbar-user"
+                <p>Olet kirjautunut nimellä {{ session.username }}</p>
+                </a>
+            {% else %}
+                <a href="/" class="navbar-user">Kirjaudu sisään</a>
+                <a class="navbar-user"
+                <p>Vierailija</p>
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="body-content">
+            {% block content %}
+            {% endblock %}
+            <hr/>
+            <br>
+            <footer>
+                <p>© Jari Sokka 2021</p>
+            </footer>
+        </div>
+    </body>
+</html>

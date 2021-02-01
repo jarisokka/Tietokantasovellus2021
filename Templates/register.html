@@ -1,0 +1,29 @@
+<!--registeration to the application-->
+
+{% extends "layout.html" %}
+{% block title %}Kuvakilpailun kuvat{% endblock %}
+
+{% block content %}
+
+<h2>Rekisteröityminen</h2>
+<p>Ole hyvä ja täytä alla olevat tiedot</p>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+
+<form action="/register" method="post">
+    Tunnus: <input type="text" name="username">
+    <p>
+    Salasana: <input type="password" name="password">
+    <p>
+    <input type="submit" value="Luo tunnus">
+    </form>
+
+{% endblock %}

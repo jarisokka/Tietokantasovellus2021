@@ -1,0 +1,24 @@
+<!--show results from the db-->
+
+{% extends "layout.html" %}
+{% block title %}Kilpailun tulokset{% endblock %}
+
+{% block content %}
+
+<h2>Kuvakilpailun tulokset</h2>
+<h3>Kilpailuun lähetettyjen kuvien määrä - {{ count }}</h3>
+<table>
+    <tr>
+        <td>
+        {% for results in results %}
+        <p> <img src="{{url_for('images', id=results[0])}}" width="30%" height="30%">  <p>
+        <p>Pistemäärä: {{ results[1] }}</p>
+        <p>Kuvaaja: {{ results[2] }}</p>
+        <br>
+        {% endfor %}
+        </td>
+    </tr>
+</table>    
+
+
+{% endblock %}

@@ -1,0 +1,45 @@
+.body-content {
+    margin: auto;
+    max-width: 45em;
+    padding: 1.5em 2em;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: lightslategray;
+    font-size: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    padding: 25px 25px 25px 25px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-brand {
+    font-size: 1em;
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+.navbar-user {
+    float: right;
+    font-size: 1em;
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+.navbar-item {
+    font-variant: small-caps;
+    margin-left: 80px;
+}
+
+.flashes {
+    text-align: center;
+    font-size: 1em;
+    font-weight: 600;
+    color: red;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

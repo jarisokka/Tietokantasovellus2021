@@ -1,0 +1,18 @@
+<!--show all images-->
+
+{% extends "layout.html" %}
+{% block title %}Kuvakilpailun kuvat{% endblock %}
+
+{% block content %}
+
+<h2>Kuvakilpailun kuvat</h2>
+<h3>Kilpailuun lähetettyjen kuvien määrä - {{ count }}</h3>
+
+<ul> 
+    {% for imageid in imageid %}
+    <p><img src="{{url_for('images', id=imageid[0])}}" width="50%" height="50%"></p>
+    <br>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+<!--upload page for images-->
+
+{% extends "layout.html" %}
+{% block title %}Kuvien lataaminen{% endblock %}
+
+{% block content %}
+
+<h2>Kuvien lataaminen</h2>
+
+<form action="/send" method="POST" enctype="multipart/form-data">
+    File: <input type="file" name="file">
+    <br>
+    <p>Kuvaajan nimi:</p>
+    <textarea name="photographer" rows="1" cols="50"></textarea>
+    <br>   
+    <input type="submit" value="Lähetä">
+</form>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+
+
+<hr>
+<h3>Tallennettuja kuvia - {{ count }}</h3>
+<ul> 
+    {% for imageid in imageid %}
+    <img src="{{url_for('images', id=imageid[0])}}" width="auto", height=100>
+    {% endfor %}
+</ul>
+<p>Voit tarvittaessa poistaa kuvia Muokkaa-kohdasta</p>
+<br>
+{% endblock %}

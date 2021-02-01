@@ -1,0 +1,16 @@
+<!--All finished-->
+
+{% extends "layout.html" %}
+{% block title %}Kiitos{% endblock %}
+
+{% block content %}
+
+<h2>Kiitos äänestämisestä</h2>
+
+<p>Voit kirjautua ulos tai jatkaa kuvien katselua Katselu-välilehdestä</p>
+<br>
+<form action="/logout" method="GET">
+    <input type="submit" value="Kirjaudu ulos">
+</form>
+<br>
+{% endblock %}
