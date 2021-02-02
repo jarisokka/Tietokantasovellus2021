@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, request, redirect, flash, session, Response
 import messages, users
 from werkzeug.security import check_password_hash, generate_password_hash
+import os
 
 #pages
 @app.route("/")
@@ -55,6 +56,7 @@ def login():
         password = request.form["password"]
         if users.login(username,password):
             session["username"] = username
+            session["csrf_token"] = os.urandom(16).hex()          
             return redirect("/")
         else:
             flash("Väärä tunnus tai salasana")
@@ -62,7 +64,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    del session["username"]
+    users.logout()
     return redirect("/")
 
 @app.route("/register", methods=["get","post"])
@@ -80,6 +82,10 @@ def register():
 
 @app.route("/sendvote", methods=["POST"])
 def sendvote():
+    #security check
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    #handle voting    
     imageid = request.form.getlist("id")
     data = request.form
 
@@ -105,6 +111,11 @@ def sendvote():
 
 @app.route("/send", methods=["POST"])
 def send():
+    #security check
+    print(session["csrf_token"])
+    print(request.form["csrf_token"])
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     #check image   
     file = request.files["file"]
     name = file.filename
@@ -131,6 +142,10 @@ def send():
 
 @app.route("/remove", methods=["POST"])
 def remove_image():
+    #security check
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    #handle deleting
     imageid = request.form["id"]
     if messages.delete_image(imageid):
         return redirect("/delete")

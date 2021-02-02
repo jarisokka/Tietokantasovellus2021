@@ -28,6 +28,7 @@
         <p>{{ idname[1] }}</p>
         <input type="hidden" name="id" value="{{ idname[0] }}">
         <input type="submit" value="Poista kuva">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <br>
     </ul>
 </form>
