@@ -7,7 +7,10 @@
 
 <h2>Kuvien poistaminen</h2>
 
-<p>Tähän ohjeita kuvien poistamiseen.</p>
+<p>Voit poistaa kuvia "Poista kuva" painikkeella. Huomioi kuitenkin, että poistamalla
+    kuvan, poistat myös kuvan kuvaajan sekä kuvalle annetut pisteet. Älä siis poista kuvaa kesken 
+    äänestyksen.
+</p>
 <br>
 
 {% with messages = get_flashed_messages() %}
@@ -24,7 +27,7 @@
 {% for idname in idname %}
 <form action="/remove" method="POST">
     <ul> 
-        <p><img src="{{url_for('images', id=idname[0])}}" width="50%" height="50%"></p>
+        <p><img src="{{url_for('images', id=idname[0])}}" width="25%" height="25%"></p>
         <p>{{ idname[1] }}</p>
         <input type="hidden" name="id" value="{{ idname[0] }}">
         <input type="submit" value="Poista kuva">
