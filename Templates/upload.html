@@ -11,7 +11,7 @@
     File: <input type="file" name="file">
     <br>
     <p>Kuvaajan nimi:</p>
-    <textarea name="photographer" rows="1" cols="50"></textarea>
+    <input required type="text" name="photographer" rows="1" cols="50"></input>
     <br>   
     <input type="submit" value="Lähetä">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">

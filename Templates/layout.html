@@ -13,10 +13,16 @@
         <div class="navbar">
             <a href="{{ url_for('index') }}" class="navbar-brand">Etusivu</a>
             <a href="{{ url_for('show_images') }}" class="navbar-brand">Katselu</a>
+
+            {% if session.get("user_id") != None %}
             <a href="{{ url_for('vote') }}" class="navbar-brand">Äänestys</a>
+            {% endif %}
+
+            {% if session.get("user_id") == 1 %}
             <a href="{{ url_for('upload') }}" class="navbar-brand">Lataaminen</a>
             <a href="{{ url_for('result') }}" class="navbar-brand">Tulokset</a>
             <a href="{{ url_for('delete') }}" class="navbar-brand">Poista</a>
+            {% endif %}
 
             {% if session.username %}
                 <a href="/logout" class="navbar-user">Kirjaudu ulos</a>

@@ -15,22 +15,31 @@ def ready():
 
 @app.route("/upload")
 def upload():
+    if session.get("user_id") != 1:
+        return render_template("error.html", error="Ei oikeutta nähdä sivua") 
+
     count = messages.count()
     imageid = messages.get_imageid()
     return render_template("upload.html", count=count, imageid=imageid)
 
 @app.route("/result")
 def result():
+    if session.get("user_id") != 1:
+        return render_template("error.html", error="Ei oikeutta nähdä sivua") 
+
     count = messages.count()
     results = messages.get_results()
     return render_template("result.html", count=count, results=results)
 
 @app.route("/vote")
 def vote():
+    if session.get("user_id") == None:
+        return render_template("error.html", error="Ei oikeutta nähdä sivua")  
+
     user_id = session["user_id"]
     result = messages.check_voter(user_id)
     imageid = messages.get_imageid()
-    return render_template("vote.html", imageid=imageid, result=result)
+    return render_template("vote.html", imageid=imageid, result=result, user_id=user_id)
 
 @app.route("/show_images")
 def show_images():
@@ -40,6 +49,9 @@ def show_images():
 
 @app.route("/delete")
 def delete():
+    if session.get("user_id") != 1:
+        return render_template("error.html", error="Ei oikeutta nähdä sivua") 
+        
     idname = messages.get_idname()
     return render_template("delete.html", idname=idname)
 
@@ -58,7 +70,7 @@ def login():
         password = request.form["password"]
         if users.login(username,password):
             session["username"] = username
-            session["csrf_token"] = os.urandom(16).hex()          
+            session["csrf_token"] = os.urandom(16).hex()                  
             return redirect("/")
         else:
             flash("Väärä tunnus tai salasana")
