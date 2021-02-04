@@ -5,6 +5,14 @@
 
 {% block content %}
 
+{% if result > 0 %}
+
+<h2>Olet jo suorittanut äänestyksen.</h2>
+
+<p>Jokainen käyttäjä voi suorittaa äänestyksen vain kerran.</p>
+
+{% else %}
+
 <h2>Kuvakilpailun äänestys</h2>
 
 <p>Äänestä kuvakisaan lähetetyistä kuvista mielestäsi viittä parasta antamalla parhaalle kuvalle 5 pistettä,
@@ -61,5 +69,7 @@ const clearSelection = (name) => {
   });
 };
 </script>
+
+{% endif %}
 
 {% endblock %}

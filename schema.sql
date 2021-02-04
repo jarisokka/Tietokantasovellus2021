@@ -21,3 +21,8 @@ CREATE TABLE users (
     username TEXT UNIQUE, 
     password TEXT
 );
+
+CREATE TABLE voters (
+    id SERIAL PRIMARY KEY, 
+    user_id INTEGER 
+);

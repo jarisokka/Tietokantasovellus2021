@@ -27,8 +27,10 @@ def result():
 
 @app.route("/vote")
 def vote():
+    user_id = session["user_id"]
+    result = messages.check_voter(user_id)
     imageid = messages.get_imageid()
-    return render_template("vote.html", imageid=imageid)
+    return render_template("vote.html", imageid=imageid, result=result)
 
 @app.route("/show_images")
 def show_images():
@@ -82,6 +84,8 @@ def register():
 
 @app.route("/sendvote", methods=["POST"])
 def sendvote():
+    print("lähetetään äänet")
+    print(session["user_id"])
     #security check
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
@@ -107,6 +111,11 @@ def sendvote():
             print("ei ääniä")
 
     messages.commit()
+
+    #register voter
+    user_id = session["user_id"]
+    messages.register_voter(user_id)
+
     return redirect("/ready")
 
 @app.route("/send", methods=["POST"])

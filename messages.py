@@ -37,7 +37,12 @@ def get_points(image_id):
     points = result.fetchone()[0]
     return points
 
-
+def check_voter(user_id):
+    result = db.session.execute("SELECT user_id FROM voters WHERE user_id=:user_id", {"user_id":user_id})
+    if result.fetchone() == None:
+        return 0
+    else:
+        return 1
 
 #SEND
 def send_image(name, data, photographer):
@@ -71,3 +76,8 @@ def delete_image(id):
     db.session.execute(sql, {"id":id})
     db.session.commit()
     return True
+
+def register_voter(user_id):
+    sql = "INSERT INTO voters (user_id) VALUES (:user_id)"
+    db.session.execute(sql, {"user_id":user_id})
+    db.session.commit()
