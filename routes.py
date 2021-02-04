@@ -16,7 +16,7 @@ def ready():
 @app.route("/upload")
 def upload():
     if session.get("user_id") != 1:
-        return render_template("error.html", error="Ei oikeutta nähdä sivua") 
+        return render_template("error.html", error="Ei oikeutta nähdä sivua.") 
 
     count = messages.count()
     imageid = messages.get_imageid()
@@ -25,7 +25,7 @@ def upload():
 @app.route("/result")
 def result():
     if session.get("user_id") != 1:
-        return render_template("error.html", error="Ei oikeutta nähdä sivua") 
+        return render_template("error.html", error="Ei oikeutta nähdä sivua.") 
 
     count = messages.count()
     results = messages.get_results()
@@ -34,7 +34,7 @@ def result():
 @app.route("/vote")
 def vote():
     if session.get("user_id") == None:
-        return render_template("error.html", error="Ei oikeutta nähdä sivua")  
+        return render_template("error.html", error="Ei oikeutta nähdä sivua.")  
 
     user_id = session["user_id"]
     result = messages.check_voter(user_id)
@@ -50,8 +50,8 @@ def show_images():
 @app.route("/delete")
 def delete():
     if session.get("user_id") != 1:
-        return render_template("error.html", error="Ei oikeutta nähdä sivua") 
-        
+        return render_template("error.html", error="Ei oikeutta nähdä sivua.") 
+
     idname = messages.get_idname()
     return render_template("delete.html", idname=idname)
 
@@ -73,7 +73,7 @@ def login():
             session["csrf_token"] = os.urandom(16).hex()                  
             return redirect("/")
         else:
-            flash("Väärä tunnus tai salasana")
+            flash("Väärä tunnus tai salasana.")
             return redirect("/")
 
 @app.route("/logout")
@@ -89,9 +89,10 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         if users.register(username,password):
+            flash("Rekisteröityminen onnistui, Voit seuraavaksi kirjautua sisään.")
             return redirect("/")
         else:
-            flash("Rekisteröinti ei onnistunut")
+            flash("Rekisteröinti ei onnistunut.")
             return redirect("/register")
 
 @app.route("/sendvote", methods=["POST"])
@@ -145,20 +146,20 @@ def send():
         return redirect("/upload")
     data = file.read()
     if len(data) > 4000*1024:
-        flash("Liian suuri tiedostokoko, max koko on 4MB")
+        flash("Liian suuri tiedostokoko, max koko on 4MB.")
         return redirect("/upload")
 
     #check photographer
     photographer = request.form["photographer"]
     if len(photographer) == 0:
-        flash("Kuvaajan nimi puuttuu")
+        flash("Kuvaajan nimi puuttuu.")
         return redirect("/upload")
     
     #send to the db
     if messages.send_image(name, data, photographer):
         return redirect("/upload")
     else:
-        flash("Kuvien lataus epäonnistui")
+        flash("Kuvien lataus epäonnistui.")
         return redirect("/upload")
 
 @app.route("/remove", methods=["POST"])
@@ -171,7 +172,7 @@ def remove_image():
     if messages.delete_image(imageid):
         return redirect("/delete")
     else:
-        flash("Kuvan poisto ei onnistunut")
+        flash("Kuvan poisto ei onnistunut.")
         return redirect("/delete")
 
 
