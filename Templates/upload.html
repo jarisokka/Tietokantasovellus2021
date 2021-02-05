@@ -7,6 +7,11 @@
 
 <h2>Kuvien lataaminen</h2>
 
+<p>Voit ladata kuvia joiden maksimi koko on maksimissaan 500kt. Jokaiselle kuvalle 
+    tulee myös antaa kuvaajan nimi.
+</p>
+<br>
+
 <form action="/send" method="POST" enctype="multipart/form-data">
     File: <input type="file" name="file">
     <br>
@@ -28,6 +33,7 @@
 {% endwith %}
 
 
+<br>
 <hr>
 <h3>Tallennettuja kuvia - {{ count }}</h3>
 <ul> 

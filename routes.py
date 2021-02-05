@@ -145,8 +145,8 @@ def send():
         flash("Väärä tiedostotyyppi")
         return redirect("/upload")
     data = file.read()
-    if len(data) > 4000*1024:
-        flash("Liian suuri tiedostokoko, max koko on 4MB.")
+    if len(data) > 500*1024:
+        flash("Liian suuri tiedostokoko, max koko on 500kt.")
         return redirect("/upload")
 
     #check photographer
