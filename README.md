@@ -1,7 +1,7 @@
-Aineopintojen harjoitustyö (Helsingin yliopisto):
-Tietokantasovellus, kevät 2021
+## Aineopintojen harjoitustyö (Helsingin yliopisto):
+# Tietokantasovellus, kevät 2021
 
-Yleistä
+## Yleistä
 Kuvakilpailun äänestyssovellus
 
 Sovelluksen avulla valokuvausseura ym. voi arvostella kuvakilpailujensa kuvia. Sovelluksella on pääkäyttäjä, joka lataa kuvat sovellukseen. Sovellukseen pääsee sisälle myös vierailijana, mutta tällöin kuvia voi vain katsella. Äänestämiseen edellytetään kirjautumista.
@@ -9,7 +9,7 @@ Sovelluksen avulla valokuvausseura ym. voi arvostella kuvakilpailujensa kuvia. S
 Sovellusta voi testata Herokussa:
 https://valokuvan-aanestys.herokuapp.com/
 
-Ohjeet
+## Ohjeet
 Sovelluksessa on kolme käyttäjätasoa; vierailija, rekisteröitynyt käyttäjä sekä pääkäyttäjä.
 
 Vierailija näkee vain etusivun sekä sivun jossa voi katsoa kilpailuun ladattuja kuvia (Katselu).
@@ -24,7 +24,7 @@ kuvan kuvaaja sekä kuvalle annetut pisteet. Tästä ohjeet kyseisellä sivulla.
 tulokset (Tulokset). Sovelluksen tarkoituksena on toimia vain äänestys alustana ja lopulliset tulokset julkaistaan 
 muissa foorumeissa.
 
-Sovelluksen kehitysvaihe
+## Sovelluksen kehitysvaihe
 Sovellus sisältää kaikki sille aluperin suunnitellut ominaisuudet ja seuraavana siihen lisätään Bootstrapin
 avulla selkeämpi ja tyylikkäämpi ulkoasu.
 
