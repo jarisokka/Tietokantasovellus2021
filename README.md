@@ -6,6 +6,9 @@ Kuvakilpailun äänestyssovellus
 
 Sovelluksen avulla valokuvausseura ym. voi arvostella kuvakilpailujensa kuvia. Sovelluksella on pääkäyttäjä, joka lataa kuvat sovellukseen. Sovellukseen pääsee sisälle myös vierailijana, mutta tällöin kuvia voi vain katsella. Äänestämiseen edellytetään kirjautumista.
 
+Sovellusta voi testata Herokussa:
+https://valokuvan-aanestys.herokuapp.com/
+
 Ohjeet
 Sovelluksessa on kolme käyttäjätasoa; vierailija, rekisteröitynyt käyttäjä sekä pääkäyttäjä.
 
@@ -24,4 +27,6 @@ muissa foorumeissa.
 Sovelluksen kehitysvaihe
 Sovellus sisältää kaikki sille aluperin suunnitellut ominaisuudet ja seuraavana siihen lisätään Bootstrapin
 avulla selkeämpi ja tyylikkäämpi ulkoasu.
+
+
 
