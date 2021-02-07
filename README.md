@@ -24,6 +24,8 @@ kuvan kuvaaja sekä kuvalle annetut pisteet. Tästä ohjeet kyseisellä sivulla.
 tulokset (Tulokset). Sovelluksen tarkoituksena on toimia vain äänestys alustana ja lopulliset tulokset julkaistaan 
 muissa foorumeissa.
 
+Pääkäyttäjän tunnukset saa minulta kurssin Telegram-kanavan kautta pyytämällä niitä yksityisviestillä.
+
 ## Sovelluksen kehitysvaihe
 Sovellus sisältää kaikki sille aluperin suunnitellut ominaisuudet ja seuraavana siihen lisätään Bootstrapin
 avulla selkeämpi ja tyylikkäämpi ulkoasu.
