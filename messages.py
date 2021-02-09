@@ -42,7 +42,7 @@ def check_voter(user_id):
     if result.fetchone() == None:
         return 0
     else:
-        return 1
+        return 2
 
 #SEND
 def send_image(name, data, photographer):
