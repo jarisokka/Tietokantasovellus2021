@@ -18,6 +18,12 @@ def get_idname():
     idname = result.fetchall()
     return idname
 
+def get_imagename(id):
+    sql = "SELECT name FROM images WHERE id=:id"
+    result = db.session.execute(sql, {"id":id})
+    name = result.fetchone()[0]
+    return name
+
 def get_results():
     result = db.session.execute("SELECT V.image_id, V.points, P.name FROM votes V, photographer P \
     WHERE V.image_id=P.image_id ORDER BY V.points DESC")

@@ -57,6 +57,7 @@ def delete():
         return render_template("error.html", error="Ei oikeutta nähdä sivua.") 
 
     idname = messages.get_idname()
+    print(idname)
     return render_template("delete.html", idname=idname)
 
 #actions
@@ -175,7 +176,10 @@ def remove_image():
         abort(403)
     #handle deleting
     imageid = request.form["id"]
+    name = messages.get_imagename(imageid)
+
     if messages.delete_image(imageid):
+        flash("Kuva " + name + " poistettiin onnistuneesti.")
         return redirect("/delete")
     else:
         flash("Kuvan poisto ei onnistunut.")
