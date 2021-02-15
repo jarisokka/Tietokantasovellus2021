@@ -78,7 +78,7 @@ def login():
             session["csrf_token"] = os.urandom(16).hex()                  
             return redirect("/")
         else:
-            flash("Väärä tunnus tai salasana.")
+            flash("Väärä tunnus tai salasana.", "error")
             return redirect("/")
 
 @app.route("/logout")
@@ -94,10 +94,10 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         if users.register(username,password):
-            flash("Rekisteröityminen onnistui, Voit seuraavaksi kirjautua sisään.")
+            flash("Rekisteröityminen onnistui, Voit seuraavaksi kirjautua sisään.", "ok")
             return redirect("/")
         else:
-            flash("Rekisteröinti ei onnistunut.")
+            flash("Rekisteröinti ei onnistunut.", "error")
             return redirect("/register")
 
 @app.route("/sendvote", methods=["POST"])
@@ -122,7 +122,7 @@ def sendvote():
                 points = int(old) + int(new)
                 messages.update_votes(points, image_id)
             else:
-                flash("Virhe; useammalle kuvalle annettu sama äänimäärä. Suorita uusi äänestys.")
+                flash("Virhe; useammalle kuvalle annettu sama äänimäärä. Suorita uusi äänestys.", "error")
                 return redirect("/vote")
         else:
             images -= 1
@@ -133,7 +133,7 @@ def sendvote():
         user_id = session["user_id"]
         messages.register_voter(user_id) #register voter
     else:    
-        flash("Virhe; yhtään ääntä ei annettu.")
+        flash("Virhe; yhtään ääntä ei annettu.", "error")
         return redirect("/vote")
 
     return redirect("/ready")
@@ -149,24 +149,24 @@ def send():
     file = request.files["file"]
     name = file.filename
     if not name.endswith(".jpg"):
-        flash("Väärä tiedostotyyppi")
+        flash("Väärä tiedostotyyppi", "error")
         return redirect("/upload")
     data = file.read()
     if len(data) > 500*1024:
-        flash("Liian suuri tiedostokoko, max koko on 500kt.")
+        flash("Liian suuri tiedostokoko, max koko on 500kt.", "error")
         return redirect("/upload")
 
     #check photographer
     photographer = request.form["photographer"]
     if len(photographer) == 0:
-        flash("Kuvaajan nimi puuttuu.")
+        flash("Kuvaajan nimi puuttuu.", "error")
         return redirect("/upload")
     
     #send to the db
     if messages.send_image(name, data, photographer):
         return redirect("/upload")
     else:
-        flash("Kuvien lataus epäonnistui.")
+        flash("Kuvien lataus epäonnistui.", "error")
         return redirect("/upload")
 
 @app.route("/remove", methods=["POST"])
@@ -179,10 +179,10 @@ def remove_image():
     name = messages.get_imagename(imageid)
 
     if messages.delete_image(imageid):
-        flash("Kuva " + name + " poistettiin onnistuneesti.")
+        flash("Kuva " + name + " poistettiin onnistuneesti.", "ok")
         return redirect("/delete")
     else:
-        flash("Kuvan poisto ei onnistunut.")
+        flash("Kuvan poisto ei onnistunut.", "error")
         return redirect("/delete")
 
 
