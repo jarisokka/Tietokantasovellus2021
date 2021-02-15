@@ -38,7 +38,11 @@ def vote():
         return render_template("error.html", error="Ei oikeutta nähdä sivua.")  
 
     user_id = session["user_id"]
-    result = messages.check_voter(user_id)
+    #admin can always see the voting page
+    if user_id != 1:
+        result = messages.check_voter(user_id)
+    else:
+        result = 1    
     imageid = messages.get_imageid()
     return render_template("vote.html", imageid=imageid, result=result, user_id=user_id)
 
