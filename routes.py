@@ -92,7 +92,7 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if users.register(username,password):
+        if  True:
             flash("Rekisteröityminen onnistui, Voit seuraavaksi kirjautua sisään.")
             return redirect("/")
         else:
