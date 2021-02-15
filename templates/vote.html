@@ -34,14 +34,19 @@
     </div>
 </div>
 
+<!--alert section-->
 {% with messages = get_flashed_messages() %}
 {% if messages %}
-<div class="row">
-    <ul class=flashes>
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-secondary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endif %}
 {% endwith %}
