@@ -27,10 +27,9 @@ def result():
     if session.get("user_id") != 1:
         return render_template("error.html", error="Ei oikeutta nähdä sivua.") 
 
-    place = 1
     count = messages.count()
     results = messages.get_results()
-    return render_template("result.html", count=count, results=results, place=place)
+    return render_template("result.html", count=count, results=results)
 
 @app.route("/vote")
 def vote():
@@ -102,14 +101,13 @@ def register():
 
 @app.route("/sendvote", methods=["POST"])
 def sendvote():
-    print("lähetetään äänet")
-    print(session["user_id"])
     #security check
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
     #handle voting    
     imageid = request.form.getlist("id")
     data = request.form
+    images = len(imageid)
 
     check = {1:0, 2:0, 3:0, 4:0, 5:0}   #this is used to check there are no double votes
 
@@ -126,13 +124,16 @@ def sendvote():
                 flash("Virhe; useammalle kuvalle annettu sama äänimäärä. Suorita uusi äänestys.")
                 return redirect("/vote")
         else:
-            print("ei ääniä")
+            images -= 1
 
-    messages.commit()
-
-    #register voter
-    user_id = session["user_id"]
-    messages.register_voter(user_id)
+    #check that some votes are given
+    if images != 0:
+        messages.commit() #register votes
+        user_id = session["user_id"]
+        messages.register_voter(user_id) #register voter
+    else:    
+        flash("Virhe; yhtään ääntä ei annettu.")
+        return redirect("/vote")
 
     return redirect("/ready")
 
