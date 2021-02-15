@@ -6,58 +6,80 @@
 {% block content %}
 
 {% if result > 1 %}
-
-<h2>Olet jo suorittanut äänestyksen.</h2>
-
-<p>Jokainen käyttäjä voi suorittaa äänestyksen vain kerran.</p>
-
+<div class="row">
+    <div class="col-md">
+        <h2>Olet jo suorittanut äänestyksen.</h2>
+        <br>
+        <p>Jokainen käyttäjä voi suorittaa äänestyksen vain kerran.</p>
+        <br>       
+    </div>
+</div>
 {% else %}
 
-<h2>Kuvakilpailun äänestys</h2>
-
-<p>Äänestä kuvakisaan lähetetyistä kuvista mielestäsi viittä parasta antamalla parhaalle kuvalle 5 pistettä,
-     toiseksi parhaalle 4 ja kolmanneksi parhaalle 3 piste jne. Äänestää vain mielestäsi viittä parasta
-     kuvaa ja muille kuville älä anna pisteitä.
-</p>
-<p> Jos muutat mieltäsi voit poistaa kuvan pisteet vas. alakulmasta "Tyhjennä" painikkeella. </p>
-  
-<p>Vuonna 2021 "Jäsenistön valinta" on oma pistekilpailunsa, jossa pisteitä saa kolme parasta kuukausittain, 
-    voittajalle 4, toiselle 2 ja kolmannelle 1 piste. Vuoden lopussa tämänkin pistekilpailun voittaja palkitaan.
-</p>
-<p>Älä äänestä kuin yhden kerran.</p>
-<br>
+<div class="row">
+    <div class="col-md">
+        <h2>Kuvakilpailun äänestys</h2>
+        <br>
+        <p>Äänestä kuvakisaan lähetetyistä kuvista mielestäsi viittä parasta antamalla parhaalle kuvalle 5 pistettä,
+            toiseksi parhaalle 4 ja kolmanneksi parhaalle 3 piste jne. Äänestää vain mielestäsi viittä parasta
+            kuvaa ja muille kuville älä anna pisteitä.
+        </p>
+        <p> Jos muutat mieltäsi voit poistaa kuvan pisteet vas. alakulmasta "Tyhjennä" painikkeella. </p>
+        
+        <p>Vuonna 2021 "Jäsenistön valinta" on oma pistekilpailunsa, jossa pisteitä saa kolme parasta kuukausittain, 
+            voittajalle 4, toiselle 2 ja kolmannelle 1 piste. Vuoden lopussa tämänkin pistekilpailun voittaja palkitaan.
+        </p>
+        <p>Älä äänestä kuin yhden kerran.</p>
+        <br>
+    </div>
+</div>
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
+<div class="row">
     <ul class=flashes>
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
     </ul>
+</div>
 {% endif %}
 {% endwith %}
 
 
-<form action="/sendvote" method="POST" name="vote">
-<ul> 
-    {% for imageid in imageid %}
-    <p><img src="{{url_for('images', id=imageid[0])}}" width="50%" height="50%"></p>
-    <input type="radio" name="{{ imageid[0] }}" id="vote1" value="1"> 1
-    <input type="radio" name="{{ imageid[0] }}" id="vote2" value="2"> 2
-    <input type="radio" name="{{ imageid[0] }}" id="vote3" value="3"> 3
-    <input type="radio" name="{{ imageid[0] }}" id="vote4" value="4"> 4
-    <input type="radio" name="{{ imageid[0] }}" id="vote5" value="5"> 5
-    <br>
+ <form action="/sendvote" method="POST" name="vote">
+    <div class="container-fluid">
+        <div class="row">
+            
+        {% for imageid in imageid %}
+        <div class="col-md-4">
+            <div class="card my-3 border-0">
+            <img class="card-img-top" src="{{url_for('images', id=imageid[0])}}" style="max-width: 100%; height: auto;">
+                <div class="card-body">
+                    <div class="card-text">
+                        <input type="radio" name="{{ imageid[0] }}" id="vote1" value="1"> 1
+                        <input type="radio" name="{{ imageid[0] }}" id="vote2" value="2"> 2
+                        <input type="radio" name="{{ imageid[0] }}" id="vote3" value="3"> 3
+                        <input type="radio" name="{{ imageid[0] }}" id="vote4" value="4"> 4
+                        <input type="radio" name="{{ imageid[0] }}" id="vote5" value="5"> 5
+                        <br>
 
-    <input type="hidden" name="id" value="{{ imageid[0] }}">
-
-    <button type="button" onclick="clearSelection({{ imageid[0] }});"> Tyhjennä</button>
-     <br>
-    {% endfor %}
-</ul>
-<input type="submit" value="Lähetä">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                        <input type="hidden" name="id" value="{{ imageid[0] }}">
+                        <br>
+                        <button type="button" class="btn btn-outline-dark btn-sm"  
+                            onclick="clearSelection({{ imageid[0] }});"> Tyhjennä</button>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        {% endfor %}
+        </div>
+    </div>
+    <input type="submit" class="btn btn-dark" value="Lähetä äänestys">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+
 
 <script type="text/javascript">
 const clearSelection = (name) => {

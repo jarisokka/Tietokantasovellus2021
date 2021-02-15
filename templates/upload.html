@@ -4,43 +4,63 @@
 {% block title %}Kuvien lataaminen{% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md">
+        <h2>Kuvien lataaminen</h2>
+        <br>
+        <p>Voit ladata kuvia joiden maksimi koko on maksimissaan 500kt. Jokaiselle kuvalle 
+            tulee myös antaa kuvaajan nimi.
+        </p>
+        <br>
+    </div>
+</div>
 
-<h2>Kuvien lataaminen</h2>
-
-<p>Voit ladata kuvia joiden maksimi koko on maksimissaan 500kt. Jokaiselle kuvalle 
-    tulee myös antaa kuvaajan nimi.
-</p>
-<br>
-
-<form action="/send" method="POST" enctype="multipart/form-data">
-    File: <input type="file" name="file">
-    <br>
-    <p>Kuvaajan nimi:</p>
-    <input required type="text" name="photographer" rows="1" cols="50"></input>
-    <br>   
-    <input type="submit" value="Lähetä">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
+<div class="row">
+    <div class="col-md-5">
+        <form action="/send" method="POST" enctype="multipart/form-data">
+            File:<input type="file" name="file">
+            <div class="form-group">
+                <br>
+                <p>Kuvaajan nimi:</p>
+                <input required type="text" name="photographer" class="form-control">
+                <br>
+                <button type="submit" class="btn btn-dark">Lähetä</button>   
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </div>
+        </form>
+    </div>
+</div>
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
+<div class="row">
     <ul class=flashes>
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
     </ul>
+</div>    
 {% endif %}
 {% endwith %}
 
 
 <br>
 <hr>
-<h3>Tallennettuja kuvia - {{ count }}</h3>
-<ul> 
-    {% for imageid in imageid %}
-    <img src="{{url_for('images', id=imageid[0])}}" width="auto", height=100>
-    {% endfor %}
-</ul>
-<p>Voit tarvittaessa poistaa kuvia Muokkaa-kohdasta</p>
-<br>
+<div class="row">
+    <div class="col-md">
+    <h3>Tallennettuja kuvia - {{ count }}</h3>
+    <br>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-md">   
+    <ul> 
+        {% for imageid in imageid %}
+        <img src="{{url_for('images', id=imageid[0])}}" width="auto", height=100 style="margin-bottom: 5px;">
+        {% endfor %}
+    </ul>
+    <p>Voit tarvittaessa poistaa kuvia Muokkaa-kohdasta</p>
+    <br>
+    </div>
+</div>
 {% endblock %}

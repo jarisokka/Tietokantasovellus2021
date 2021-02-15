@@ -4,15 +4,34 @@
 {% block title %}Kuvakilpailun kuvat{% endblock %}
 
 {% block content %}
-
-<h2>Kuvakilpailun kuvat</h2>
-<h3>Kilpailuun lähetettyjen kuvien määrä - {{ count }}</h3>
-
-<ul> 
-    {% for imageid in imageid %}
-    <p><img src="{{url_for('images', id=imageid[0])}}" width="50%" height="50%"></p>
-    <br>
-    {% endfor %}
-</ul>
-
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-md-center">
+            <h2>Kuvakilpailun kuvat</h2>
+            <br>
+            <p>Kilpailuun lähetettyjen kuvien määrä - {{ count }}</p>
+            <br>
+        </div>
+    </div>
+    <hr/>
+    <div class="row justify-content-md-center">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000" style="max-width: 60%; height: auto;">
+        <div class="carousel-inner">
+        {% for imageid in imageid %}
+            <div class="carousel-item {% if loop.index == 1 %} active {% endif %}" id="slide{{ loop.index }}">
+                <img class="img-fluid" src="{{url_for('images', id=imageid[0])}}">  
+            </div>
+        {% endfor %}
+        </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

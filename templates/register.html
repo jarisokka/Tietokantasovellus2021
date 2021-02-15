@@ -4,26 +4,43 @@
 {% block title %}Rekisteröityminen{% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md">
+        <h2>Rekisteröityminen</h2>
+        <br>
+        <p>Ole hyvä ja täytä alla olevat tiedot. Suositeltavaa on, että annat
+             selkeän käyttäjätunnuksen esim. oma etunimi ja yli viisi merkkiä pitkän salasanan. 
+             Sovelluksessa ei voi olla kahta saman nimistä käyttäjää, joten valitse 
+             itsellesi jokin toinen tunnus, jos kyseinen tunnus on jo varattu.
+        </p>
+        <br>       
+    </div>
+</div>
 
-<h2>Rekisteröityminen</h2>
-<p>Ole hyvä ja täytä alla olevat tiedot</p>
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
+<div class="row">
     <ul class=flashes>
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
     </ul>
+</div>
 {% endif %}
 {% endwith %}
 
-<form action="/register" method="post">
-    Tunnus: <input required type="text" name="username">
-    <p>
-    Salasana: <input required type="password" name="password">
-    <p>
-    <input type="submit" value="Luo tunnus">
-    </form>
+<div class="row">
+    <div class="col-md-4">
+        <form action="/register" method="post">
+            <div class="form-group">
+            Käyttäjätunnus: <input required type="text" name="username" class="form-control" placeholder="Käyttäjätunnus">
+            Salasana: <input required type="password" name="password" class="form-control" placeholder="Salasana">
+            <br>
+            <button type="submit" class="btn btn-dark">Luo tunnus</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

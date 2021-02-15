@@ -4,40 +4,82 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" /> 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     </head>
 
     <body>
-        <div class="navbar">
-            <a href="{{ url_for('index') }}" class="navbar-brand">Etusivu</a>
-            <a href="{{ url_for('show_images') }}" class="navbar-brand">Katselu</a>
-
-            {% if session.get("user_id") != None %}
-            <a href="{{ url_for('vote') }}" class="navbar-brand">Äänestys</a>
-            {% endif %}
-
-            {% if session.get("user_id") == 1 %}
-            <a href="{{ url_for('upload') }}" class="navbar-brand">Lataaminen</a>
-            <a href="{{ url_for('result') }}" class="navbar-brand">Tulokset</a>
-            <a href="{{ url_for('delete') }}" class="navbar-brand">Muokkaa</a>
-            {% endif %}
-
-            {% if session.username %}
-                <a href="/logout" class="navbar-user">Kirjaudu ulos</a>
-                <a class="navbar-user"
-                <p>Olet kirjautunut nimellä {{ session.username }}</p>
-                </a>
-            {% else %}
-                <a href="/" class="navbar-user">Kirjaudu sisään</a>
-                <a class="navbar-user"
-                <p>Vierailija</p>
-                </a>
-            {% endif %}
-        </div>
-
-        <div class="body-content">
+        <!-- Beginning of nav -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a href="#" class="navbar-brand">Logo</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- View for all -->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ml-auto mb-2 mt-2">
+                <li class="nav-item px-1">
+                    <a href="{{ url_for('index') }}" class="nav-link" >Etusivu</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="{{ url_for('show_images') }}" class="nav-link">Katselu</a>
+                </li>
+            <!-- View for login -->
+                {% if session.get("user_id") != None %}
+                <li class="nav-item px-1">
+                    <a href="{{ url_for('vote') }}" class="nav-link">Äänestys</a>
+                </li>
+                {% endif %}
+            <!-- View for admin -->
+                {% if session.get("user_id") == 1 %}
+                <li class="nav-item px-1">
+                    <a href="{{ url_for('upload') }}" class="nav-link">Lataaminen</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="{{ url_for('result') }}" class="nav-link">Tulokset</a>
+                </li>
+                <li class="nav-item px-1">
+                    <a href="{{ url_for('delete') }}" class="nav-link">Muokkaa</a>
+                </li>
+                {% endif %}
+            <!-- Show who is the user -->
+                {% if session.username %}
+                <li class="nav-item px-1">
+                    <a href="/logout" class="nav-link">Kirjaudu ulos</a>
+                </li>
+                <li class="nav-item">  
+                    <span class="navbar-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                        {{ session.username }}
+                    </span>
+                </li>    
+                {% else %}
+                <li class="nav-item px-1">
+                    <a href="/" class="nav-link">Kirjaudu sisään</a>
+                </li>
+                <li class="nav-item">
+                    <span class="navbar-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                        Vierailija
+                    </span>
+                </li>   
+                {% endif %}
+            </ul>
+            </div>
+        </nav>
+        <!-- End of nav -->
+        
+        <br>
+        <div class="container">
             {% block content %}
             {% endblock %}
             <hr/>
@@ -46,5 +88,9 @@
                 <p>© Jari Sokka 2021</p>
             </footer>
         </div>
+
+        <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     </body>
 </html>

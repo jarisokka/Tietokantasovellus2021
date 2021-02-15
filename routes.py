@@ -27,9 +27,10 @@ def result():
     if session.get("user_id") != 1:
         return render_template("error.html", error="Ei oikeutta nähdä sivua.") 
 
+    place = 1
     count = messages.count()
     results = messages.get_results()
-    return render_template("result.html", count=count, results=results)
+    return render_template("result.html", count=count, results=results, place=place)
 
 @app.route("/vote")
 def vote():

@@ -4,13 +4,20 @@
 {% block title %}Kiitos{% endblock %}
 
 {% block content %}
-
-<h2>Kiitos äänestämisestä</h2>
-
-<p>Voit kirjautua ulos tai jatkaa kuvien katselua Katselu-välilehdestä</p>
-<br>
-<form action="/logout" method="GET">
-    <input type="submit" value="Kirjaudu ulos">
-</form>
-<br>
+<div class="row">
+    <div class="col-md">
+        <h2>Kiitos äänestämisestä</h2>
+        <br>
+        <p>Voit kirjautua ulos tai jatkaa kuvien katselua Katselu-välilehdestä</p>
+        <br>
+    </div>
+</div> 
+<div class="row">
+    <div class="col-md-5"> 
+        <form action="/logout" method="GET">
+            <button type="submit" class="btn btn-dark">Kirjaudu ulos</button>
+        </form>
+    <br>
+    </div>
+</div>     
 {% endblock %}

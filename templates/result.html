@@ -4,21 +4,47 @@
 {% block title %}Kilpailun tulokset{% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md">
+    <h2>Kuvakilpailun tulokset</h2>
+    <br>
+    <p>Kilpailuun lähetettyjen kuvien määrä - {{ count }}</p>
+    <br>
+    </div>
+</div>
 
-<h2>Kuvakilpailun tulokset</h2>
-<h3>Kilpailuun lähetettyjen kuvien määrä - {{ count }}</h3>
-<table>
-    <tr>
-        <td>
-        {% for results in results %}
-        <p> <img src="{{url_for('images', id=results[0])}}" width="30%" height="30%">  <p>
-        <p>Pistemäärä: {{ results[1] }}</p>
-        <p>Kuvaaja: {{ results[2] }}</p>
-        <br>
-        {% endfor %}
-        </td>
-    </tr>
-</table>    
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <table class="table table-image">
+                <thead>
+                    <tr>
+                        <th scope="col">Sija</th>
+                        <th scope="col">Kuva</th>
+                        <th scope="col">Pistemäärä</th>
+                        <th scope="col">Kuvaaja</th>  
+                    </tr>
+                </thead>
+      
+                <tbody>  
+                {% for results in results %}
+                <tr>
+                    <th scope="row" style="vertical-align: middle">{{ loop.index }}</th>
+                    <td class="w-25">
+                    <img src="{{url_for('images', id=results[0])}}" class="img-fluid img-thumbnail">
+                    </td>
+
+                    <td class="pisteet" style="vertical-align: middle"> {{ results[1] }} </td>
+                    <td class="kuvaaja" style="vertical-align: middle"> {{ results[2] }} </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table> 
+        </div>
+    </div>
+</div>
+
 
 
 {% endblock %}
+

@@ -4,50 +4,75 @@
 {% block title %}Etusivu{% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md">
+        <h1>Tervetuloa valokuvien äänestykseen</h1>
+        <br>
+        <p>Voit tutustua kuviin jatkamalla vierailijana, mutta äänestykseen
+            vaaditaan sisäänkirjautumista. Jos sinulla ei ole vielä tunnuksia, voit
+            luoda ne rekisteröitymis kohdasta.
+        </p>
+        <br>
+    </div>
+</div>
 
-<h1>Tervetuloa valokuvien äänestykseen</h1>
-<p>Voit tutustua kuviin jatkamalla vierailijana, mutta äänestykseen
-    vaaditaan sisäänkirjautumista. Jos sinulla ei ole vielä tunnuksia, voit
-    luoda ne rekisteröitymis kohdasta.
-</p>
-<br>
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
+<div class="row">
     <ul class=flashes>
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
     </ul>
+</div>
 {% endif %}
 {% endwith %}
 
-{% if session.username %}
 
-<p> Tervetuloa äänestämään käyttäjä {{ session.username }}</p>
-<br>
-<p> Voit siityä äänestämään valitsemalla Äänestys-välilehden</p>
-<br>
+{% if session.username %}
+<div class="row">
+    <div class="col-md">
+    <p>Tervetuloa äänestämään käyttäjä {{ session.username }}.</p>
+    <br>
+    <p>Voit siityä äänestämään valitsemalla Äänestys-välilehden.</p>
+    </div>
+    <br>
+</div>
 {% else %}
 
-<form action="/login" method="POST">
-    <label for="username">Tunnus:</label>
-    <input type="text" name="username"><br>
-    <label for="password">Salasana:</label>
-    <input type="password" name="password"><br>
-    <input type="submit" value="Kirjaudu">
-  </form>
-<br>
-<br>
-<p>Voit jatkaa myös vierailijana</p>
-<form action="/show_images" method="GET">
-    <input type="submit" value="Jatka vierailijana">
-</form>
-<p>Jos sinulla ei ole tunnusta voit rekisteröityä tästä</p>
-<form action="/register" method="GET">
-    <input type="submit" value="Rekisteröidy">
-</form>
 
+<div class="row align-items-end">
+    <div class="col-md-4" style="margin-right: 50px;">
+        <form action="/login" method="POST">
+            <div class="form-group">
+            <p>Kirjaudu sisään</p>
+            <label for="username">Tunnus:</label>
+            <input required type="text" name="username" class="form-control" placeholder="Käyttäjätunnus">
+            <label for="password">Salasana:</label>
+            <input required type="password" name="password" class="form-control" placeholder="Salasana"><br>
+            <button type="submit" class="btn btn-dark">Kirjaudu</button>
+            </div>
+        </form>
+    <br>
+    </div>
+    <div class="col-md">
+        <form action="/show_images" method="GET">
+            <div class="form-group">
+            <br>
+            <p>Voit jatkaa myös vierailijana</p>
+             <button type="submit" class="btn btn-dark">Jatka vierailijana</button>
+            </div>
+        </form>
+        <form action="/register" method="GET">
+            <div class="form-group">
+            <p>Jos sinulla ei ole tunnusta voit rekisteröityä tästä</p>
+            <button type="submit" class="btn btn-dark">Rekisteröidy</button>
+            </div>
+        </form>
+        <br>
+    </div>
+</div>
 {% endif %}
 
 {% endblock %}
