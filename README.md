@@ -11,6 +11,8 @@ https://valokuvan-aanestys.herokuapp.com/
 
 ## Ohjeet
 Sovelluksessa on kolme käyttäjätasoa; vierailija, rekisteröitynyt käyttäjä sekä pääkäyttäjä.
+Huom! Jos käytät sovellusta locaalisti omalla koneellasi, perusta pääkäyttäjä tietokantaan ensimmäisenä,
+näin käyttäjätasot toimivat halutulla tavalla.
 
 Vierailija näkee vain etusivun sekä sivun jossa voi katsoa kilpailuun ladattuja kuvia (Katselu).
 
@@ -27,8 +29,8 @@ muissa foorumeissa.
 Pääkäyttäjän tunnukset saa minulta kurssin Telegram-kanavan kautta pyytämällä niitä yksityisviestillä.
 
 ## Sovelluksen kehitysvaihe
-Sovellus sisältää kaikki sille aluperin suunnitellut ominaisuudet ja seuraavana siihen lisätään Bootstrapin
-avulla selkeämpi ja tyylikkäämpi ulkoasu.
+Sovellus sisältää kaikki sille aluperin suunnitellut ominaisuudet. Viimeisenä lisäyksenä siihen on lisätty
+Bootstrap ja muokattu ulkoasua sen avulla. Kehitysehdotuksia otetaan mielellään vastaan.
 
 
 
