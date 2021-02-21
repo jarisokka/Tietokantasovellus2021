@@ -5,6 +5,7 @@
 
 {% block content %}
 
+<!--if voted already, show this-->
 {% if result > 1 %}
 <div class="row">
     <div class="col-md">
@@ -16,6 +17,7 @@
 </div>
 {% else %}
 
+<!--main message-->
 <div class="row">
     <div class="col-md">
         <h2>Kuvakilpailun äänestys</h2>
@@ -59,7 +61,7 @@
 {% endif %}
 {% endwith %}
 
-
+<!--images and rating-->
  <form action="/sendvote" method="POST" name="vote">
     <div class="container-fluid">
         <div class="row">
@@ -70,30 +72,58 @@
             <img class="card-img-top" src="{{url_for('images', id=imageid[0])}}" style="max-width: 100%; height: auto;">
                 <div class="card-body">
                     <div class="card-text">
-                        <input type="radio" name="{{ imageid[0] }}" id="vote1" value="1"> 1
-                        <input type="radio" name="{{ imageid[0] }}" id="vote2" value="2"> 2
-                        <input type="radio" name="{{ imageid[0] }}" id="vote3" value="3"> 3
-                        <input type="radio" name="{{ imageid[0] }}" id="vote4" value="4"> 4
-                        <input type="radio" name="{{ imageid[0] }}" id="vote5" value="5"> 5
-                        <br>
 
+                        <div class="form-check form-check-inline">                          
+                        <input type="radio" class="form-check-input" name="{{ imageid[0] }}" id="vote1" value="1">
+                        <label class="form-check-label" for="vote1">1</label>
+                        <span class="radio__control"></span>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="{{ imageid[0] }}" id="vote2" value="2">
+                        <label class="form-check-label" for="vote2">2</label>
+                        <span class="radio__control"></span>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="{{ imageid[0] }}" id="vote3" value="3">
+                        <label class="form-check-label" for="vote3">3</label>
+                        <span class="radio__control"></span>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="{{ imageid[0] }}" id="vote4" value="4">
+                        <label class="form-check-label" for="vote4">4</label>
+                        <span class="radio__control"></span>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" name="{{ imageid[0] }}" id="vote5" value="5">
+                        <label class="form-check-label" for="vote5">5</label>
+                        <span class="radio__control"></span>
+                        </div>
+ 
+                        <br>
                         <input type="hidden" name="id" value="{{ imageid[0] }}">
                         <br>
                         <button type="button" class="btn btn-outline-dark btn-sm"  
                             onclick="clearSelection({{ imageid[0] }});"> Tyhjennä</button>
                         <br>
+
                     </div>
                 </div>
             </div>
         </div>   
         {% endfor %}
-        </div>
     </div>
-    <input type="submit" class="btn btn-dark" value="Lähetä äänestys">
+</div>
+    <button type="submit" class="btn btn-dark">Lähetä äänestys</button>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <br>
+
 </form>
 
-
+<!--script for clearing the radio buttons-->
 <script type="text/javascript">
 const clearSelection = (name) => {
   const radioBtns = document.querySelectorAll(

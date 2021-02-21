@@ -1,0 +1,26 @@
+/* stars for voting */
+
+.card-text input {
+    position:absolute;
+    z-index:999;
+}   
+.card-text input:checked ~ .radio__control:before{
+    margin-left: -30px;
+    content: '\f005';
+    font-size: 40px;
+    color: #0275d8;
+    transition: all 0.2s;
+}
+.card-text input:checked ~ .radio__control:after{
+    color: #0275d8;                 
+}
+.radio__control:before {
+    margin-left: -30px;
+    content: '\f006';
+    font-size: 40px;
+    font-family: fontAwesome;
+}
+.card-text label{
+    position:absolute;
+    margin-top: 50px;
+}
