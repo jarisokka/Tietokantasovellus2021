@@ -92,3 +92,12 @@ def register_voter(user_id):
     sql = "INSERT INTO voters (user_id) VALUES (:user_id)"
     db.session.execute(sql, {"user_id":user_id})
     db.session.commit()
+
+def empty():
+    points = 0
+    sql = "UPDATE votes SET points = :points"
+    db.session.execute(sql, {"points":points})
+    sql = "TRUNCATE TABLE voters"
+    db.session.execute(sql)
+    db.session.commit()
+    return True

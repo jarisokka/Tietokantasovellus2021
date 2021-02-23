@@ -1,21 +1,35 @@
 <!--delete images-->
 
 {% extends "layout.html" %}
-{% block title %}Kuvien poisto{% endblock %}
+{% block title %}Kilpailun muokkaus{% endblock %}
 
 {% block content %}
+
+<!--empty votes-->
 <div class="row">
     <div class="col-md">
-        <h2>Kuvien poistaminen</h2>
+        <h2>Kilpailun äänestyksen nollaus</h2>
         <br>
-        <p>Voit poistaa kuvia "Poista kuva" painikkeella. Huomioi kuitenkin, että poistamalla
-            kuvan, poistat myös kuvan kuvaajan sekä kuvalle annetut pisteet. Älä siis poista kuvaa kesken 
-            äänestyksen.
+        <p>Voit tyhjentää kilpailun kaikki annetut äänet "Tyhjennä äänestys" painikkeella. Tämä ei
+            poista kilpailun kuvia, vain annetut äänet. Tämä myös mahdollistaa, että jokainen rekisteröitynyt
+            käyttäjä voi suorittaa äänestyksen uudelleen.
         </p>
         <br>
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+                <form action="/emptyvotes" method="POST">
+                        <button type="submit" class="btn btn-danger">Tyhjennä äänestys</button>
+                        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+                <br>
+        </div>
+    </div>
+</div>
+<br>
 
 <!--alert section-->
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -42,6 +56,18 @@
 {% endif %}
 {% endwith %}
 
+<!--remove image-->
+<div class="row">
+    <div class="col-md">
+        <h2>Kuvien poistaminen</h2>
+        <br>
+        <p>Voit poistaa kuvia "Poista kuva" painikkeella. Huomioi kuitenkin, että poistamalla
+            kuvan, poistat myös kuvan kuvaajan sekä kuvalle annetut pisteet. Älä siis poista kuvaa kesken 
+            äänestyksen.
+        </p>
+        <br>
+    </div>
+</div>
 
 <div class="container">
     <div class="row">

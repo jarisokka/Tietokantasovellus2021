@@ -186,4 +186,15 @@ def remove_image():
         flash("Kuvan poisto ei onnistunut.", "error")
         return redirect("/delete")
 
-
+@app.route("/emptyvotes", methods=["POST"])
+def empty():
+    #security check
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    #handle removing votes
+    if messages.empty():
+        flash("Äänestystulokset nollattu", "ok")
+        return redirect("/delete")
+    else:
+        flash("Tyhjennys ei onnistunut", "error")
+        return redirect("/delete")
