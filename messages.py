@@ -8,6 +8,11 @@ def count():
     count = result.fetchone()[0]
     return count
 
+def count_voters():
+    result = db.session.execute("SELECT COUNT(*) FROM voters")
+    voters = result.fetchone()[0]
+    return voters
+
 def get_imageid():
     result = db.session.execute("SELECT id FROM images")
     imageid = result.fetchall()

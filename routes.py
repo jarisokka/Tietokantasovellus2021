@@ -29,7 +29,8 @@ def result():
 
     count = messages.count()
     results = messages.get_results()
-    return render_template("result.html", count=count, results=results)
+    voters = messages.count_voters()
+    return render_template("result.html", count=count, results=results, voters=voters)
 
 @app.route("/vote")
 def vote():
