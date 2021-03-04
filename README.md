@@ -22,15 +22,18 @@ suorittaa vain kerran per käyttäjä.
 
 Pääkäyttäjän tehtävä on ladata kuvat äänestykseen (Lataaminen) jossa kuvalle annetaan myös kuvaajan nimi. Kuvalle on 
 määritelty myös maksimikoko. Kuvia voi myös poistaa sovelluksen tietokannasta (Muokkaa). Samalla poistuu myös kyseisen
-kuvan kuvaaja sekä kuvalle annetut pisteet. Tästä ohjeet kyseisellä sivulla. Pääkäyttäjä näkee myös äänestyksen
-tulokset (Tulokset). Sovelluksen tarkoituksena on toimia vain äänestys alustana ja lopulliset tulokset julkaistaan 
-muissa foorumeissa.
+kuvan kuvaaja sekä kuvalle annetut pisteet. Tästä ohjeet kyseisellä sivulla. Muokkaa-sivulla voi myös nollata
+äänestyksen pisteet. Samalla myös nollataan tietokanta, jossa pidetään kirjaa äänestäneistä, näin jokainen rekistöitynyt
+käyttäjä voi suorittaa äänestyksen uudelleen. Pääkäyttäjä näkee myös äänestyksen tulokset (Tulokset). Sovelluksen tarkoituksena 
+on toimia vain äänestysalustana ja lopulliset tulokset julkaistaan muissa foorumeissa.
+
+Ulkoasu on muokattu Bootstrap:in avulla. Suuria muutoksia oletusulkoasuun ei ole tehty.
 
 Pääkäyttäjän tunnukset saa minulta kurssin Telegram-kanavan kautta pyytämällä niitä yksityisviestillä.
 
 ## Sovelluksen kehitysvaihe
-Sovellus sisältää kaikki sille aluperin suunnitellut ominaisuudet. Viimeisenä lisäyksenä siihen on lisätty
-Bootstrap ja muokattu ulkoasua sen avulla. Kehitysehdotuksia otetaan mielellään vastaan.
+Sovellus sisältää kaikki sille aluperin suunnitellut ominaisuudet. Viimeisenä lisäyksenä on tehty
+äänestyksen nollaaminen Muokkaa-sivulle.
 
 
 
